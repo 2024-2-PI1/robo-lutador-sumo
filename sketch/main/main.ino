@@ -1,6 +1,6 @@
 const int buttonPin = 2; // Entrada
-const int ultraEcho = 6;
-const int ultraTrig = 7;
+const int ultraEcho = 6; // Entrada
+const int ultraTrig = 7; // Saida
 const int sensorLinhaA = 8; // Entrada
 const int sensorLinhaB = 9; // Entrada
 
