@@ -14,5 +14,5 @@ bool detectaLinha() {
   LinhaAState = digitalRead(sensorLinhaA);
   LinhaBState = digitalRead(sensorLinhaB);
 
-  return !(LinhaAState && LinhaBState);
+  return !(LinhaAState || LinhaBState);
 }
