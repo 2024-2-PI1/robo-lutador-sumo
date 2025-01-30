@@ -1,12 +1,12 @@
+# define IN1 5;
+# define IN2 6;
+# define IN3 9;
+# define IN4 10;
+
+# define ENA 3;
+# define ENB 4;
+
 void ligarMotores(int velocidade);
-
-const int IN1 = 4;
-const int IN2 = 5;
-const int IN3 = 6;
-const int IN4 = 7;
-
-const int ENA = 3;
-const int ENB = 8;
 /*
 Liga os motores com a velocidade informada, passar
 um inteiro negativo como parámetro faz o robô dar ré
