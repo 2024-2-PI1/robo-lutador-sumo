@@ -1,4 +1,3 @@
-#include <NewPing.h>
 #include "ultrasonico.h"
 #include "linha.h"
 #include "driver.h"
