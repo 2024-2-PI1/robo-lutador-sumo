@@ -2,6 +2,10 @@
 #include "linha.h"
 #include "driver.h"
 
+#define velocidade 200
+#define esquerdo 150
+#define direito 220
+
 void setup() {
   Serial.begin(9600);
 
@@ -22,20 +26,21 @@ void setup() {
   Serial.println("Pinos configurados");
 }
 
-int velocidade = 100;
-
 void loop() {
-  /*
+
   while (!detectaLinha()) {
-    int distancia = lerUltra();
-    if (distancia <= 150) {
-      ligarMotores(velocidade);
-    }
-    delay(10);
+    andarFrente(esquerdo, direito);
   }
-  */
-
-  ligarMotores(velocidade);
-
-  delay(50);
+  parar();
+  delay(2000);
+  long tempoInicial = millis(); 
+  while (millis() - tempoInicial < 500) { 
+    andarTras(esquerdo, direito); 
+  }
+  parar();
+  long tempoRotacao = millis();
+  while (millis() - tempoRotacao < 400){
+    rotacionar(velocidade);
+  }
+  delay(100);
 }
