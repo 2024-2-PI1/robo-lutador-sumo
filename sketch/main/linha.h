@@ -3,8 +3,8 @@
 
 bool detectaLinha();
 
-int LinhaAState;
-int LinhaBState;
+int LinhaAState = 1;
+int LinhaBState = 1;
 
 /* 
 Função que retorna true caso a linha esteja sendo 
