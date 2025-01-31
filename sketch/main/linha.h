@@ -1,10 +1,10 @@
+# define sensorLinhaA 2
+# define sensorLinhaB 3
+
 bool detectaLinha();
 
-const int sensorLinhaA = 8;
-const int sensorLinhaB = 9;
-
-int LinhaAState = 1;
-int LinhaBState = 1;
+int LinhaAState;
+int LinhaBState;
 
 /* 
 Função que retorna true caso a linha esteja sendo 
@@ -14,5 +14,5 @@ bool detectaLinha() {
   LinhaAState = digitalRead(sensorLinhaA);
   LinhaBState = digitalRead(sensorLinhaB);
 
-  return !(LinhaAState || LinhaBState);
+  return LinhaAState || LinhaBState;
 }
