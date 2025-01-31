@@ -1,8 +1,8 @@
+# define ultraEcho 4
+# define ultraTrig 7
+
 double microsecondsToCentimeters(double duration);
 long readUltra ();
-
-const int ultraEcho = 6;
-const int ultraTrig = 7;
 
 /*
 Função de conversão de microsegundos para centímetros
