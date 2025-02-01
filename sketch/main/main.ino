@@ -23,6 +23,9 @@ void setup() {
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
 
+  digitalWrite(ENA, HIGH);
+  digitalWrite(ENB, HIGH);
+
   Serial.println("Pinos configurados");
 }
 
