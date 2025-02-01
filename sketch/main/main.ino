@@ -3,8 +3,8 @@
 #include "driver.h"
 
 #define velocidade 200
-#define esquerdo 150
-#define direito 220
+#define esquerdo 600
+#define direito 800
 
 void setup() {
   Serial.begin(9600);

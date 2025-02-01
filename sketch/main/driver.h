@@ -17,28 +17,24 @@ um inteiro negativo como parámetro faz o robô dar ré
 */
 
 void andarFrente(int esquerdo, int direito){
-  digitalWrite(IN1, HIGH);
+  analogWrite(IN1, direito);
   digitalWrite(IN2, LOW);
-  digitalWrite(IN3, HIGH);
+  analogWrite(IN3, esquerdo);
   digitalWrite(IN4, LOW);
-  analogWrite(ENA, esquerdo);
-  analogWrite(ENB, direito);
+  // analogWrite(ENA, esquerdo);
+  // analogWrite(ENB, direito);
 }
 void andarTras(int esquerdo, int direito){
   digitalWrite(IN1, LOW);
-  digitalWrite(IN2, HIGH);
+  analogWrite(IN2, direito);
   digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);  
-  analogWrite(ENA, esquerdo);
-  analogWrite(ENB, direito);
+  analogWrite(IN4, esquerdo);  
 }
 void rotacionar(int velocidade){
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);  
-  analogWrite(ENA, velocidade);
-  analogWrite(ENB, velocidade);
   // digitalWrite(IN3, LOW);
   // digitalWrite(IN4, LOW);  
 }
