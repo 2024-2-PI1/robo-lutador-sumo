@@ -1,8 +1,16 @@
-#include "ultrasonico.h"
-#include "linha.h"
-#include "driver.h"
+# include "ultrasonico.h"
+# include "linha.h"
+# include "driver.h"
+
+# define ROTACAO 100
+# define ESQUERDO 150
+# define DIREITO 150
+# define DISTANCIA_LIMITE 150
 
 volatile bool linhaDetectada = false;
+bool girando = false;
+unsigned long ultimoTempoRotacao = 0;
+
 void detectarLinha() {
   linhaDetectada = true;
 }
@@ -18,7 +26,6 @@ void setup() {
 
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
-
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
@@ -32,20 +39,44 @@ void setup() {
 }
 
 void loop() {
+  if (linhaDetectada) {
 
-  while (!detectaLinha()) {
-    andarFrente(esquerdo, direito);
+    parar();
+    delay(200);
+    
+    unsigned long tempoInicial = millis();
+    while (millis() - tempoInicial < 700) { 
+      andarTras(ESQUERDO, DIREITO);
+    }
+    
+    parar();
+    
+    unsigned long tempoRotacao = millis();
+    while (millis() - tempoRotacao < 600) {
+      rotacionar(ROTACAO);
+    }
+    
+    linhaDetectada = false;
+    
+  } else {
+    
+    long distancia = lerDistancia(); 
+    
+    if (distancia < DISTANCIA_LIMITE) {
+      andarFrente(ESQUERDO, DIREITO);
+    } else {
+      if (millis() - ultimoTempoRotacao >= 200){
+        ultimoTempoRotacao = millis();
+
+        if (girando){
+          parar();
+        } else {
+          rotacionar(ROTACAO);
+        }
+        girando = !girando;
+      }
+    }
   }
-  parar();
-  delay(2000);
-  long tempoInicial = millis(); 
-  while (millis() - tempoInicial < 500) { 
-    andarTras(esquerdo, direito); 
-  }
-  parar();
-  long tempoRotacao = millis();
-  while (millis() - tempoRotacao < 400){
-    rotacionar(velocidade);
-  }
-  delay(100);
+  
+  delay(10);
 }
