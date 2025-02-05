@@ -16,10 +16,10 @@ volatile uint8_t eepromLinha = 0;
 
 void detectarLinha() {
   linhaDetectada = true;
-  EEPROM.write(0, ++eepromLinha);
 }
 
 void setup() {
+  EEPROM.begin();
   Serial.begin(9600);
 
   pinMode(ultraEcho, INPUT);
@@ -47,6 +47,8 @@ void loop() {
 
     parar();
     delay(200);
+
+    EEPROM.write(0, ++eepromLinha);
     
     unsigned long tempoInicial = millis();
     while (millis() - tempoInicial < 700) { 
