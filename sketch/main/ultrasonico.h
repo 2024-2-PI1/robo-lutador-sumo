@@ -2,7 +2,7 @@
 # define ultraTrig 7
 
 double microsecondsToCentimeters(double duration);
-long readUltra();
+long lerDistancia();
 
 /*
 Função de conversão de microsegundos para centímetros
@@ -12,10 +12,10 @@ double microsecondsToCentimeters(double duration) {
 }
 
 /*
-Função que retorna a distância, em centimetros, do sensor ultrasonico
+Função que retorna a distância, em centimetros, do sensor ultrassonico
 até o objeto mais perto do sensor.
 */
-long readUltra() {
+long lerDistancia() {
   digitalWrite(ultraTrig, LOW);
   delayMicroseconds(5);
   digitalWrite(ultraTrig, HIGH);
@@ -23,7 +23,8 @@ long readUltra() {
   digitalWrite(ultraTrig, LOW);
 
   long duration = pulseIn(ultraEcho, HIGH);
-  long cm = microsecondsToCentimeters(duration);
 
-  return cm;
+  if (duration == 0) return;
+
+  return microsecondsToCentimeters(duration);
 } 
