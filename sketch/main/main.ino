@@ -2,9 +2,10 @@
 #include "linha.h"
 #include "driver.h"
 
-#define velocidade 200
-#define esquerdo 600
-#define direito 800
+volatile bool linhaDetectada = false;
+void detectarLinha() {
+  linhaDetectada = true;
+}
 
 void setup() {
   Serial.begin(9600);
@@ -12,8 +13,8 @@ void setup() {
   pinMode(ultraEcho, INPUT);
   pinMode(ultraTrig, OUTPUT);            
 
-  pinMode(sensorLinhaA, INPUT);
-  pinMode(sensorLinhaB, INPUT);
+  pinMode(sensorLinhaA, INPUT_PULLUP);
+  pinMode(sensorLinhaB, INPUT_PULLUP);
 
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
@@ -26,7 +27,8 @@ void setup() {
   digitalWrite(ENA, HIGH);
   digitalWrite(ENB, HIGH);
 
-  Serial.println("Pinos configurados");
+  attachInterrupt(digitalPinToInterrupt(sensorLinhaA), detectarLinha, FALLING);
+  attachInterrupt(digitalPinToInterrupt(sensorLinhaB), detectarLinha, FALLING);
 }
 
 void loop() {
