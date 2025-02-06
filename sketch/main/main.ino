@@ -1,6 +1,7 @@
 # include "ultrasonico.h"
 # include "linha.h"
 # include "driver.h"
+# include "eeprom.h"
 
 # define ROTACAO 100
 # define ESQUERDO 150
@@ -18,6 +19,7 @@ void detectarLinha() {
 
 void setup() {
   Serial.begin(9600);
+  initEEPROM();
 
   pinMode(ultraEcho, INPUT);
   pinMode(ultraTrig, OUTPUT);            
@@ -60,8 +62,8 @@ void loop() {
     linhaDetectada = false;
     incrementaLinha();
   } else {
-    
-    long distancia = lerDistancia(); 
+    long distancia = lerDistancia();
+    distanciaMaxima(distancia);
 
     if (distancia < DISTANCIA_LIMITE) {
       if (distancia <= 15) {
@@ -93,6 +95,7 @@ void loop() {
       }
     }
   }
-  
+
+  tempoDecorrido();
   delay(10);
 }

@@ -8,10 +8,8 @@ utilizando a função analogWrite() da biblioteca padrão do Arduino.
 #define IN3 9
 #define IN4 10
 
-/*
 #define ENA 8
 #define ENB 11
-*/
 
 void andarFrente(int velocidade);
 void andarTras(int velocidade);
