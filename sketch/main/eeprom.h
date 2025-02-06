@@ -28,9 +28,8 @@ void initEEPROM() {
 /*
 Função que atualiza o tempo, em segundos, em que o robô está ligado
 */
-void tempoDecorrido() {
-  eepromTempo = millis() / 1000;
-  EEPROM.put(eepromTempoId, eepromTempo);
+void tempoDecorrido(int tempo) {
+  EEPROM.put(eepromTempoId, tempo);
 }
 
 /*
@@ -38,7 +37,8 @@ Função que incrementa quantas vezes a linha foi detectada pelo sensor infraver
 na seção de tratamento do interrupt gerado pela detecção da linha.
 */
 void incrementaLinha() {
-  EEPROM.put(eepromLinhaId, ++eepromLinha);
+  eepromLinha = eepromLinha + 1;
+  EEPROM.put(eepromLinhaId, eepromLinha);
 }
 
 /*

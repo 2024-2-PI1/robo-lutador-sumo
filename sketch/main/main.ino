@@ -3,7 +3,7 @@
 # include "driver.h"
 # include "eeprom.h"
 
-# define ROTACAO 100
+# define ROTACAO 200
 # define ESQUERDO 150
 # define DIREITO 150
 # define DISTANCIA_LIMITE 150
@@ -14,12 +14,15 @@ bool girando = false;
 unsigned long ultimoTempoRotacao = 0;
 
 void detectarLinha() {
+  incrementaLinha();
   linhaDetectada = true;
 }
 
 void setup() {
   Serial.begin(9600);
   initEEPROM();
+
+  incrementaLinha();
 
   pinMode(ultraEcho, INPUT);
   pinMode(ultraTrig, OUTPUT);            
@@ -43,7 +46,6 @@ void setup() {
 
 void loop() {
   if (linhaDetectada) {
-
     parar();
     delay(200);
     
@@ -55,18 +57,18 @@ void loop() {
     parar();
     
     unsigned long tempoRotacao = millis();
-    while (millis() - tempoRotacao < 600) {
+    while (millis() - tempoRotacao < 400) {
       rotacionar(ROTACAO);
     }
     
     linhaDetectada = false;
-    incrementaLinha();
+    
   } else {
     long distancia = lerDistancia();
-    distanciaMaxima(distancia);
-
+    
     if (distancia < DISTANCIA_LIMITE) {
-      if (distancia <= 15) {
+      distanciaMaxima(distancia);
+      if (distancia <= 5) {
         unsigned long comecouEmpurrar = millis(); //teste
         andarFrente(V_MAX, V_MAX);
 
@@ -83,7 +85,8 @@ void loop() {
       }
 
     } else {
-      if (millis() - ultimoTempoRotacao >= 300){ //200
+
+      if (millis() - ultimoTempoRotacao >= 200){ //200
         ultimoTempoRotacao = millis();
 
         if (girando){
@@ -96,6 +99,6 @@ void loop() {
     }
   }
 
-  tempoDecorrido();
+  tempoDecorrido(millis() / 1000);
   delay(10);
 }

@@ -10,12 +10,13 @@ const int eepromDistaId = 8;
 int unsigned eepromDista;
 
 void setup() {
-  EEPROM.begin();
   Serial.begin(9600);
 
   EEPROM.get(eepromTempoId, eepromTempo);
   EEPROM.get(eepromLinhaId, eepromLinha);
   EEPROM.get(eepromDistaId, eepromDista);
+
+  Serial.println();
 
   Serial.print("Tempo de funcionamento do robô: ");
   Serial.print(eepromTempo);
@@ -29,7 +30,7 @@ void setup() {
 
   Serial.print("Distância máxima detectada pelo sensor ultrasonico: ");
   Serial.print(eepromDista);
-  Serial.println("centimetros");
+  Serial.println(" centimetros");
   Serial.println();
 }
 
