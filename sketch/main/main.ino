@@ -1,7 +1,6 @@
 # include "ultrasonico.h"
 # include "linha.h"
 # include "driver.h"
-# include <EEPROM.h>
 
 # define ROTACAO 100
 # define ESQUERDO 150
@@ -12,14 +11,12 @@
 volatile bool linhaDetectada = false;
 bool girando = false;
 unsigned long ultimoTempoRotacao = 0;
-volatile uint8_t eepromLinha = 0; 
 
 void detectarLinha() {
   linhaDetectada = true;
 }
 
 void setup() {
-  EEPROM.begin();
   Serial.begin(9600);
 
   pinMode(ultraEcho, INPUT);
@@ -47,8 +44,6 @@ void loop() {
 
     parar();
     delay(200);
-
-    EEPROM.write(0, ++eepromLinha);
     
     unsigned long tempoInicial = millis();
     while (millis() - tempoInicial < 700) { 
@@ -63,7 +58,7 @@ void loop() {
     }
     
     linhaDetectada = false;
-    
+    incrementaLinha();
   } else {
     
     long distancia = lerDistancia(); 
@@ -81,9 +76,8 @@ void loop() {
             andarFrente(V_MAX, V_MAX);
           } */
         // teste
-      }:
-      else {
-      andarFrente(ESQUERDO, DIREITO);
+      } else {
+        andarFrente(ESQUERDO, DIREITO);
       }
 
     } else {
