@@ -20,15 +20,18 @@ Função de inicialização do EEPROM, no qual todas os endereços são zerados 
 lixo de memória afete a coleta de dados do robô.
 */
 void initEEPROM() {
-  for (int i = 0; i < EEPROM.length(); i++) {
-    EEPROM.write(i, 0);
+  int apagar = EEPROM.read(13);
+  if (apagar) {
+    for (int i = 0; i < EEPROM.length(); i++) {
+      EEPROM.write(i, 0);
+    }
   }
 }
 
 /*
 Função que atualiza o tempo, em segundos, em que o robô está ligado
 */
-void tempoDecorrido(int tempo) {
+void tempoDecorrido(unsigned int tempo) {
   EEPROM.put(eepromTempoId, tempo);
 }
 
@@ -37,14 +40,13 @@ Função que incrementa quantas vezes a linha foi detectada pelo sensor infraver
 na seção de tratamento do interrupt gerado pela detecção da linha.
 */
 void incrementaLinha() {
-  eepromLinha = eepromLinha + 1;
   EEPROM.put(eepromLinhaId, eepromLinha);
 }
 
 /*
 Função que armazena qual a maior distância detectada pelo ultrasonico.
 */
-void distanciaMaxima(int distancia) {
+void distanciaMaxima(unsigned int distancia) {
   if (distancia > eepromDista) {
     eepromDista = distancia;
     EEPROM.put(eepromDistaId, eepromDista);

@@ -32,6 +32,12 @@ void setup() {
   Serial.print(eepromDista);
   Serial.println(" centimetros");
   Serial.println();
+
+  EEPROM.write(13, 1);
+
+  delay(1000);
 }
 
-void loop() {}
+void loop() {
+  delay(1000);
+}

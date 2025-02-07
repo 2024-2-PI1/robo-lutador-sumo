@@ -1,5 +1,5 @@
-# define ultraEcho 4
-# define ultraTrig 7
+#define ultraEcho 4
+#define ultraTrig 7
 
 double microsecondsToCentimeters(double duration);
 long lerDistancia();
