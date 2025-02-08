@@ -1,5 +1,7 @@
 #include <EEPROM.h>
 
+// Posições na memória EEPROM em que os dados
+// coletados em tempo de execução estão armazenados
 const int eepromTempoId = 0;
 int unsigned eepromTempo;
 
@@ -9,6 +11,9 @@ int unsigned eepromLinha;
 const int eepromDistaId = 8;
 int unsigned eepromDista;
 
+
+// Função que lê os dados coletados enquanto o robô estava ligado
+// e imprime esses valores no terminal.
 void setup() {
   Serial.begin(9600);
 
